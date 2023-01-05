@@ -18,14 +18,17 @@ class NewTransaction extends StatelessWidget {
               TextField(
                 decoration: const InputDecoration(labelText: 'Title'),
                 controller: titleController,
+                keyboardType: TextInputType.text,
+                onSubmitted: (_) => submitNewTransactionForm(),
               ),
               TextField(
                 decoration: const InputDecoration(labelText: 'Amount'),
                 controller: amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => submitNewTransactionForm(),
               ),
               TextButton(
-                onPressed: () => onAddTransaction(
-                    titleController.text, double.parse(amountController.text)),
+                onPressed: submitNewTransactionForm,
                 child: const Text('Add transaction',
                     style: TextStyle(
                         color: Colors.blue,
@@ -35,5 +38,14 @@ class NewTransaction extends StatelessWidget {
             ]),
       ),
     );
+  }
+
+  void submitNewTransactionForm() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = amountController.text;
+    if (enteredTitle.isEmpty || enteredAmount.isEmpty) {
+      return;
+    }
+    onAddTransaction(enteredTitle, double.tryParse(enteredAmount));
   }
 }
