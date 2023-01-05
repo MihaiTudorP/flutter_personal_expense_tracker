@@ -11,10 +11,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter App',
-      home: MyHomePage(),
-    );
+    return MaterialApp(
+        title: 'Personal expenses',
+        home: const MyHomePage(),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          splashColor: Colors.red,
+          fontFamily: 'Quicksand',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                titleLarge: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+                titleMedium: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+                titleSmall: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14),
+              ),
+          appBarTheme: const AppBarTheme(
+              titleTextStyle: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+        ));
   }
 }
 
@@ -70,10 +93,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Container(
+              SizedBox(
                   width: double.infinity,
-                  child: const Card(
-                      color: Colors.blue, elevation: 5, child: Text('Chart!'))),
+                  child: Card(
+                      color: Theme.of(context).primaryColor,
+                      elevation: 5,
+                      child: const Text('Chart!'))),
               UserTransactions(
                 userTransactions: _userTransactions,
               ),
@@ -82,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () => startAddNewTransaction(context),
-        backgroundColor: Colors.red,
+        backgroundColor: Theme.of(context).splashColor,
         child: const Icon(Icons.add),
       ),
     );

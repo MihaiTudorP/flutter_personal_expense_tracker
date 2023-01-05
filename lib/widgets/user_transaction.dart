@@ -13,15 +13,16 @@ class UserTransaction extends StatelessWidget {
         children: <Widget>[
           Container(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.blue, width: 2)),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: Theme.of(context).primaryColor, width: 2)),
             padding: const EdgeInsets.all(10),
             alignment: Alignment.center,
             child: Text(
               "\$${transaction.amount.toStringAsFixed(2)}",
-              style: const TextStyle(
+              style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Theme.of(context).primaryColor,
                   fontSize: 20),
             ),
           ),
@@ -31,15 +32,16 @@ class UserTransaction extends StatelessWidget {
             children: <Widget>[
               Text(
                 transaction.title,
-                style: const TextStyle(
+                style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: Colors.black),
+                    color: Theme.of(context).textTheme.titleLarge?.color),
               ),
               Text(
                 DateFormat().add_yMMMMd().format(transaction.date),
-                style: const TextStyle(
-                    fontSize: 13, color: Color.fromRGBO(20, 20, 20, 100)),
+                style: TextStyle(
+                    fontSize: 13,
+                    color: Theme.of(context).textTheme.headline1?.color),
               )
             ],
           )
