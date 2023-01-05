@@ -18,7 +18,7 @@ class UserTransaction extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             alignment: Alignment.center,
             child: Text(
-              "\$ ${transaction.amount.toString()}",
+              "\$${transaction.amount.toStringAsFixed(2)}",
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
