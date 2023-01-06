@@ -7,7 +7,7 @@ class TransactionList extends StatelessWidget {
   final List<Transaction> userTransactions;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       child: userTransactions.isEmpty
           ? Column(
@@ -17,7 +17,7 @@ class TransactionList extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
+                SizedBox(
                     height: 200,
                     child: Image.asset('assets/images/waiting.png',
                         fit: BoxFit.cover))

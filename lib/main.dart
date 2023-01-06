@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expense_tracker/widgets/chart.dart';
 import 'package:personal_expense_tracker/widgets/new_transaction.dart';
 import 'package:personal_expense_tracker/widgets/user_transactions.dart';
 
@@ -74,10 +75,23 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  List<Transaction> get getRecentTransactions {
+    return _userTransactions.where((transaction) {
+      return transaction.date.isAfter(getOldestDateTruncated);
+    }).toList();
+  }
+
+  DateTime get getOldestDateTruncated {
+    final oldestDate = DateTime.now().subtract(const Duration(days: 7));
+    final truncatedOldestDate =
+        DateTime(oldestDate.year, oldestDate.month, oldestDate.day);
+    return truncatedOldestDate;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter App'), actions: <Widget>[
+      appBar: AppBar(title: const Text('Personal expenses'), actions: <Widget>[
         IconButton(
             onPressed: () => startAddNewTransaction(context),
             icon: const Icon(Icons.add))
@@ -89,9 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                   width: double.infinity,
                   child: Card(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).cardColor,
                       elevation: 5,
-                      child: const Text('Chart!'))),
+                      child: Chart(recentTransactions: getRecentTransactions))),
               UserTransactions(
                 userTransactions: _userTransactions,
               ),
